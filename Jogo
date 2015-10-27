@@ -1,0 +1,22 @@
+package showmilhao.poo.ufba;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class Jogo {
+
+	static  int nDePulos = 3;
+	static  int dinheiro = 0;
+	static  int dinheiroAcumulado = 0;
+	
+	static int acertos = 0;
+	
+	static List<Questao> todasQuestoes  = new <Questao> ArrayList();
+	static List<Questao> listaQuestoes  = new <Questao> ArrayList();
+	
+	
+	public static void main(String[] args) {
+	}
+}
