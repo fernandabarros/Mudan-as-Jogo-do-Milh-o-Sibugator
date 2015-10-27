@@ -1,0 +1,620 @@
+package showmilhao.poo.ufba;
+
+
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+
+public class PanelPerguntas extends JFrame implements ActionListener  {
+
+	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+	
+	static   JLabel	pergunta;
+	static   JButton res[] = new JButton[4];
+	JButton  parar = new JButton();
+	JButton  pular;
+	
+	static  JLabel  acertos;
+	static  JLabel  acumulado;
+	static  JLabel  pulos;
+	
+	static  JFrame  w1;
+	
+	static List<Questao> todasQuestoes  = new <Questao> ArrayList();
+	static List<Questao> listaQuestoes  = new <Questao> ArrayList();
+	
+	
+	public static List <Questao> setListaQuestoes (int nivelQuestao) {
+		for (Questao questao: todasQuestoes) {
+			if (questao.getNivel() == nivelQuestao) {
+				listaQuestoes.add(questao);
+			}
+		}
+		return  listaQuestoes;
+	}
+	
+	
+	public static List getListaQuestoes() {
+		return listaQuestoes;
+	}
+	
+	
+	public static void embaralharListaQuestoes() {
+		Collections.shuffle(listaQuestoes);
+	}
+	
+	
+	
+	public PanelPerguntas(){
+		w1 = new JFrame();
+		w1.setSize(420,450);
+		w1.setLocation((int)(dim.getWidth()-420)/2,(int)(dim.getHeight()-450)/2);
+		w1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		w1.setVisible(true);
+		w1.getContentPane().setLayout(null);
+		
+		pergunta = new JLabel("Perguntas aqui:");
+		pergunta.setBounds(52,15,300,40);
+		w1.getContentPane().add(pergunta);
+		
+		res[0] = new JButton("	");
+		res[0].setBounds(52,80,300,40);
+		w1.getContentPane().add(res[0]);
+		
+		res[1] = new JButton("	");
+		res[1].setBounds(52,140,300,40);
+		w1.getContentPane().add(res[1]);
+		
+		res[2] = new JButton("	");
+		res[2].setBounds(52,200,300, 40);
+		w1.getContentPane().add(res[2]);
+		
+		res[3] = new JButton("	");
+		res[3].setBounds(52, 260,300, 40);
+		w1.getContentPane().add(res[3]);
+		
+		parar = new JButton("PARAR");
+		parar.setBounds(272, 340,80, 40);
+		w1.getContentPane().add(parar);
+		
+		pular = new JButton("PULAR");
+		pular.setBounds(172, 340, 80, 40);
+		w1.getContentPane().add(pular);
+		
+		acertos = new JLabel("Acerto: R$:1000,00");
+		acertos.setBounds(12,320,150,40);
+		w1.getContentPane().add(acertos);
+		
+		acumulado = new JLabel("Acumulado: R$:0,00");
+		acumulado.setBounds(12,350,180,40);
+		w1.getContentPane().add(acumulado);
+		
+		pulos = new JLabel ("Você tem 3 pulos"); 
+		pulos.setBounds(12,380,150,40);
+		w1.getContentPane().add(pulos);
+		
+		parar.addActionListener(this);
+		pular.addActionListener(this);
+		res[0].addActionListener(this);
+		res[1].addActionListener(this);
+		res[2].addActionListener(this);
+		res[3].addActionListener(this);
+	}
+	
+	
+	//função para setar as perguntas na JanelaPerguntas
+	public static void setBox(int nivel) {
+		
+		Questao primeiraQuestao = listaQuestoes.get(0);
+			
+		List <String> respostas = primeiraQuestao.getRespostas();
+		String respostaCorreta = primeiraQuestao.getRespostaCorreta();
+				
+		pergunta.setText(primeiraQuestao.pergunta);
+		res[0].setText(respostas.get(0));
+		res[1].setText(respostas.get(1));
+		res[2].setText(respostas.get(2));
+		res[3].setText(respostas.get(3));
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+			
+	
+	public static void main(String[] args) {
+		
+		//FALTA CRIAR O BANCO DE DADOS
+		/*um molde de 10 perguntas aleatórias p/ cada nível -> falta inserir os dados
+		 * criar -> banco de dados com as questões
+		 */
+		
+		//perguntas nível 1 -> total 16 perguntas
+		List<String> rq1 = new ArrayList<String>();
+		Questao q1 = new Questao("n1 - Qual era a cor do cavalo branco de Napoleão?", rq1, "azul", 1, 1000, 1);
+		rq1.add("branco");
+		rq1.add("azul");
+		rq1.add("amarelo");
+		rq1.add("preto");
+		
+		List<String> rq2 = new ArrayList<String>();
+		Questao q2 = new Questao("n1 - pergunta2", rq2, "c", 1, 1000, 2);
+		rq2.add("e");
+		rq2.add("e");
+		rq2.add("c");
+		rq2.add("e");
+		
+		List<String> rq3 = new ArrayList<String>();
+		Questao q3 = new Questao("n1 - pergunta3", rq3, "c", 1, 1000, 3);
+		rq3.add("c");
+		rq3.add("e");
+		rq3.add("e");
+		rq3.add("e");
+		
+		List<String> rq4 = new ArrayList<String>();
+		Questao q4 = new Questao("n1 - pergunta4", rq4, "c", 1, 1000, 4);
+		rq4.add("e");
+		rq4.add("c");
+		rq4.add("e");
+		rq4.add("e");
+		
+		List<String> rq5 = new ArrayList<String>();
+		Questao q5 = new Questao("n1 - pergunta5", rq5, "c", 1, 1000, 5);
+		rq5.add("e");
+		rq5.add("e");
+		rq5.add("c");
+		rq5.add("e");
+		
+		List<String> rq6 = new ArrayList<String>();
+		Questao q6 = new Questao("n1 - pergunta6", rq6, "c", 1, 1000, 6);
+		rq6.add("e");
+		rq6.add("e");
+		rq6.add("e");
+		rq6.add("c");
+		
+		List<String> rq7 = new ArrayList<String>();
+		Questao q7 = new Questao("n1 - pergunta7", rq7, "c", 1, 1000, 7);
+		rq7.add("e");
+		rq7.add("e");
+		rq7.add("e");
+		rq7.add("c");
+		
+		List<String> rq8 = new ArrayList<String>();
+		Questao q8 = new Questao("n1 - pergunta8", rq8, "c", 1, 1000, 8);
+		rq8.add("e");
+		rq8.add("e");
+		rq8.add("e");
+		rq8.add("c");
+		
+		List<String> rq9 = new ArrayList<String>();
+		Questao q9 = new Questao("n1 - pergunta9", rq9, "c", 1, 1000, 9);
+		rq9.add("e");
+		rq9.add("e");
+		rq9.add("e");
+		rq9.add("c");
+		
+		List<String> rq10 = new ArrayList<String>();
+		Questao q10 = new Questao("n1 - pergunta10", rq10, "c", 1, 1000, 10);
+		rq10.add("c");
+		rq10.add("e");
+		rq10.add("e");
+		rq10.add("e");
+		
+		List<String> rq11 = new ArrayList<String>();
+		Questao q11 = new Questao("n1 - pergunta11", rq11, "c", 1, 1000, 11);
+		rq11.add("e");
+		rq11.add("e");
+		rq11.add("c");
+		rq11.add("e");
+		
+		List<String> rq12 = new ArrayList<String>();
+		Questao q12 = new Questao("n1 - pergunta12", rq12, "c", 1, 1000, 12);
+		rq12.add("e");
+		rq12.add("e");
+		rq12.add("e");
+		rq12.add("c");
+		
+		List<String> rq13 = new ArrayList<String>();
+		Questao q13 = new Questao("n1 - pergunta13", rq13, "c", 1, 1000, 13);
+		rq13.add("e");
+		rq13.add("e");
+		rq13.add("e");
+		rq13.add("c");
+		
+		List<String> rq14 = new ArrayList<String>();
+		Questao q14 = new Questao("n1 - pergunta14", rq14, "c", 1, 1000, 14);
+		rq14.add("e");
+		rq14.add("e");
+		rq14.add("e");
+		rq14.add("c");
+		
+		List<String> rq15 = new ArrayList<String>();
+		Questao q15 = new Questao("n1 - pergunta15", rq15, "c", 1, 1000, 15);
+		rq15.add("c");
+		rq15.add("e");
+		rq15.add("e");
+		rq15.add("e");
+		
+		List<String> rq16 = new ArrayList<String>();
+		Questao q16 = new Questao("n1 - pergunta16", rq16, "c", 1, 1000, 16);
+		rq16.add("e");
+		rq16.add("c");
+		rq16.add("e");
+		rq16.add("e");
+		
+				
+		//perguntas nível 2
+		List<String> rt1 = new ArrayList<String>();
+		Questao t1 = new Questao("n2 - pergunta", rt1, "c", 2, 10000, 1);
+		rt1.add("e");
+		rt1.add("c");
+		rt1.add("e");
+		rt1.add("e");
+						
+		List<String> rt2 = new ArrayList<String>();
+		Questao t2 = new Questao("n2 - pergunta2", rt2, "c", 2, 10000, 2);
+		rt2.add("e");
+		rt2.add("e");
+		rt2.add("c");
+		rt2.add("e");
+						
+		List<String> rt3 = new ArrayList<String>();
+		Questao t3 = new Questao("n2 - pergunta3", rt3, "c", 2, 10000, 3);
+		rt3.add("c");
+		rt3.add("e");
+		rt3.add("e");
+		rt3.add("e");
+						
+		List<String> rt4 = new ArrayList<String>();
+		Questao t4 = new Questao("n2 - pergunta4", rt4, "c", 2, 10000, 4);
+		rt4.add("e");
+		rt4.add("c");
+		rt4.add("e");
+		rt4.add("e");
+				
+		List<String> rt5 = new ArrayList<String>();
+		Questao t5 = new Questao("n2 - pergunta5", rt5, "c", 2, 10000, 5);
+		rt5.add("e");
+		rt5.add("e");
+		rt5.add("c");
+		rt5.add("e");
+						
+		List<String> rt6 = new ArrayList<String>();
+		Questao t6 = new Questao("n2 - pergunta6", rt6, "c", 2, 10000, 6);
+		rt6.add("e");
+		rt6.add("e");
+		rt6.add("e");
+		rt6.add("c");
+						
+		List<String> rt7 = new ArrayList<String>();
+		Questao t7 = new Questao("n2 - pergunta7", rt7, "c", 2, 10000, 7);
+		rt7.add("e");
+		rt7.add("e");
+		rt7.add("e");
+		rt7.add("c");
+						
+		List<String> rt8 = new ArrayList<String>();
+		Questao t8 = new Questao("n2 - pergunta8", rt8, "c", 2, 10000, 8);
+		rt8.add("e");
+		rt8.add("e");
+		rt8.add("e");
+		rt8.add("c");
+				
+		List<String> rt9 = new ArrayList<String>();
+		Questao t9 = new Questao("n2 - pergunta9", rt9, "c", 2, 10000, 9);
+		rt9.add("e");
+		rt9.add("e");
+		rt9.add("e");
+		rt9.add("c");
+						
+		List<String> rt10 = new ArrayList<String>();
+		Questao t10 = new Questao("n2 - pergunta10", rt10, "c", 2, 10000, 10);
+		rt10.add("c");
+		rt10.add("e");
+		rt10.add("e");
+		rt10.add("e");
+		
+		List<String> rt11 = new ArrayList<String>();
+		Questao t11 = new Questao("n2 - pergunta11", rt11, "c", 2, 10000, 11);
+		rt11.add("e");
+		rt11.add("e");
+		rt11.add("c");
+		rt11.add("e");
+						
+		List<String> rt12 = new ArrayList<String>();
+		Questao t12 = new Questao("n2 - pergunta12", rt12, "c", 2, 10000, 12);
+		rt12.add("e");
+		rt12.add("e");
+		rt12.add("e");
+		rt12.add("c");
+						
+		List<String> rt13 = new ArrayList<String>();
+		Questao t13 = new Questao("n2 - pergunta13", rt13, "c", 2, 10000, 13);
+		rt13.add("e");
+		rt13.add("e");
+		rt13.add("e");
+		rt13.add("c");
+						
+		List<String> rt14 = new ArrayList<String>();
+		Questao t14 = new Questao("n2 - pergunta14", rt14, "c", 2, 10000, 14);
+		rt14.add("e");
+		rt14.add("e");
+		rt14.add("e");
+		rt14.add("c");
+				
+		List<String> rt15 = new ArrayList<String>();
+		Questao t15 = new Questao("n2 - pergunta15", rt15, "c", 2, 10000, 15);
+		rt15.add("e");
+		rt15.add("e");
+		rt15.add("e");
+		rt15.add("c");
+		
+		List<String> rt16 = new ArrayList<String>();
+		Questao t16 = new Questao("n2 - pergunta16", rt16, "c", 2, 10000, 16);
+		rt16.add("e");
+		rt16.add("c");
+		rt16.add("e");
+		rt16.add("e");
+				
+		//perguntas nível 3
+		List<String> rl1 = new ArrayList<String>();
+		Questao l1 = new Questao("n3 - pergunta", rl1, "c", 3, 100000, 1);
+		rl1.add("e");
+		rl1.add("c");
+		rl1.add("e");
+		rl1.add("e");
+						
+		List<String> rl2 = new ArrayList<String>();
+		Questao l2 = new Questao("n3 - pergunta2", rl2, "c", 3, 100000, 2);
+		rl2.add("e");
+		rl2.add("e");
+		rl2.add("c");
+		rl2.add("e");
+						
+		List<String> rl3 = new ArrayList<String>();
+		Questao l3 = new Questao("n3 - pergunta3", rl3, "c", 3, 100000, 3);
+		rl3.add("c");
+		rl3.add("e");
+		rl3.add("e");
+		rl3.add("e");
+				
+		List<String> rl4 = new ArrayList<String>();
+		Questao l4 = new Questao("n3 - pergunta4", rl4, "c", 3, 100000, 4);
+		rl4.add("e");
+		rl4.add("c");
+		rl4.add("e");
+		rl4.add("e");
+					
+		List<String> rl5 = new ArrayList<String>();
+		Questao l5 = new Questao("n3 - pergunta5", rl5, "c", 3, 100000, 5);
+		rl5.add("e");
+		rl5.add("e");
+		rl5.add("c");
+		rl5.add("e");
+						
+		List<String> rl6 = new ArrayList<String>();
+		Questao l6 = new Questao("n3 - pergunta6", rl6, "c", 3, 100000, 6);
+		rl6.add("e");
+		rl6.add("e");
+		rl6.add("e");
+		rl6.add("c");
+						
+		List<String> rl7 = new ArrayList<String>();
+		Questao l7 = new Questao("n3 - pergunta7", rl7, "c", 3, 100000, 7);
+		rl7.add("e");
+		rl7.add("e");
+		rl7.add("e");
+		rl7.add("c");
+					
+		List<String> rl8 = new ArrayList<String>();
+		Questao l8 = new Questao("n3 - pergunta8", rl8, "c", 3, 100000, 8);
+		rl8.add("e");
+		rl8.add("e");
+		rl8.add("e");
+		rl8.add("c");
+						
+		List<String> rl9 = new ArrayList<String>();
+		Questao l9 = new Questao("n3 - pergunta9", rl9, "c", 3, 100000, 9);
+		rl9.add("e");
+		rl9.add("e");
+		rl9.add("e");
+		rl9.add("c");
+						
+		List<String> rl10 = new ArrayList<String>();
+		Questao l10 = new Questao("n3 - pergunta10", rl10, "c", 3, 100000, 10);
+		rl10.add("c");
+		rl10.add("e");
+		rl10.add("e");
+		rl10.add("e");
+		
+		List<String> rl11 = new ArrayList<String>();
+		Questao l11 = new Questao("n3 - pergunta11", rl11, "c", 3, 100000, 11);
+		rl11.add("e");
+		rl11.add("c");
+		rl11.add("e");
+		rl11.add("e");
+					
+		List<String> rl12 = new ArrayList<String>();
+		Questao l12 = new Questao("n3 - pergunta12", rl12, "c", 3, 100000, 12);
+		rl12.add("e");
+		rl12.add("e");
+		rl12.add("c");
+		rl12.add("e");
+						
+		List<String> rl13 = new ArrayList<String>();
+		Questao l13 = new Questao("n3 - pergunta13", rl13, "c", 3, 100000, 13);
+		rl13.add("e");
+		rl13.add("e");
+		rl13.add("e");
+		rl13.add("c");
+						
+		List<String> rl14 = new ArrayList<String>();
+		Questao l14 = new Questao("n3 - pergunta14", rl14, "c", 3, 100000, 14);
+		rl14.add("e");
+		rl14.add("e");
+		rl14.add("e");
+		rl14.add("c");
+					
+		List<String> rl15 = new ArrayList<String>();
+		Questao l15 = new Questao("n3 - pergunta15", rl15, "c", 3, 100000, 15);
+		rl15.add("e");
+		rl15.add("e");
+		rl15.add("e");
+		rl15.add("c");
+						
+		List<String> rl16 = new ArrayList<String>();
+		Questao l16 = new Questao("n3 - pergunta16", rl16, "c", 3, 100000, 16);
+		rl16.add("e");
+		rl16.add("e");
+		rl16.add("e");
+		rl16.add("c");
+				
+		//perguntas finais
+		List<String> rf1 = new ArrayList<String>();
+		Questao f1 = new Questao("final - pergunta", rf1, "c", 4, 1000000, 1);
+		rf1.add("e");
+		rf1.add("c");
+		rf1.add("e");
+		rf1.add("e");
+					
+		List<String> rf2 = new ArrayList<String>();
+		Questao f2 = new Questao("final - pergunta2", rf2, "c", 4, 1000000, 2);
+		rf2.add("e");
+		rf2.add("e");
+		rf2.add("c");
+		rf2.add("e");
+					
+		List<String> rf3 = new ArrayList<String>();
+		Questao f3 = new Questao("final - pergunta3", rf3, "c", 4, 1000000, 3);
+		rf3.add("c");
+		rf3.add("e");
+		rf3.add("e");
+		rf3.add("e");
+						
+		List<String> rf4 = new ArrayList<String>();
+		Questao f4 = new Questao("final - pergunta4", rf4, "c", 4, 1000000, 4);
+		rf4.add("e");
+		rf4.add("c");
+		rf4.add("e");
+		rf4.add("e");
+						
+		List<String> rf5 = new ArrayList<String>();
+		Questao f5 = new Questao("final - pergunta5", rf5, "c", 4, 1000000, 5);
+		rf5.add("e");
+		rf5.add("e");
+		rf5.add("c");
+		rf5.add("e");
+					
+		List<String> rf6 = new ArrayList<String>();
+		Questao f6 = new Questao("final - pergunta6", rf6, "c", 4, 1000000, 6);
+		rf6.add("e");
+		rf6.add("e");
+		rf6.add("e");
+		rf6.add("c");
+						
+		List<String> rf7 = new ArrayList<String>();
+		Questao f7 = new Questao("final - pergunta7", rf7, "c", 4, 1000000, 7);
+		rf7.add("e");
+		rf7.add("e");
+		rf7.add("e");
+		rf7.add("c");
+						
+		List<String> rf8 = new ArrayList<String>();
+		Questao f8 = new Questao("final - pergunta8", rf8, "c", 4, 1000000, 8);
+		rf8.add("e");
+		rf8.add("e");
+		rf8.add("e");
+		rf8.add("c");
+						
+		List<String> rf9 = new ArrayList<String>();
+		Questao f9 = new Questao("final - pergunta9", rf9, "c", 4, 1000000, 9);
+		rf9.add("e");
+		rf9.add("e");
+		rf9.add("e");
+		rf9.add("c");
+				
+		List<String> rf10 = new ArrayList<String>();
+		Questao f10 = new Questao("final - pergunta10", rf10, "c", 4, 1000000, 10);
+		rf10.add("c");
+		rf10.add("e");
+		rf10.add("e");
+		rf10.add("e");
+		
+		List<String> rf11 = new ArrayList<String>();
+		Questao f11 = new Questao("final - pergunta11", rf11, "c", 4, 1000000, 11);
+		rf11.add("e");
+		rf11.add("e");
+		rf11.add("c");
+		rf11.add("e");
+					
+		List<String> rf12 = new ArrayList<String>();
+		Questao f12 = new Questao("final - pergunta12", rf12, "c", 4, 1000000, 12);
+		rf12.add("e");
+		rf12.add("e");
+		rf12.add("e");
+		rf12.add("c");
+						
+		List<String> rf13 = new ArrayList<String>();
+		Questao f13 = new Questao("final - pergunta13", rf13, "c", 4, 1000000, 13);
+		rf13.add("e");
+		rf13.add("e");
+		rf13.add("e");
+		rf13.add("c");
+						
+		List<String> rf14 = new ArrayList<String>();
+		Questao f14 = new Questao("final - pergunta14", rf14, "c", 4, 1000000, 14);
+		rf14.add("e");
+		rf14.add("e");
+		rf14.add("e");
+		rf14.add("c");
+						
+		List<String> rf15 = new ArrayList<String>();
+		Questao f15 = new Questao("final - pergunta15", rf15, "c", 4, 1000000, 15);
+		rf15.add("e");
+		rf15.add("e");
+		rf15.add("e");
+		rf15.add("c");
+				
+		List<String> rf16 = new ArrayList<String>();
+		Questao f16 = new Questao("final - pergunta16", rf16, "c", 4, 1000000, 16);
+		rf16.add("c");
+		rf16.add("e");
+		rf16.add("e");
+		rf16.add("e");
+		
+		
+		//criando a lista com todas as questões do jogo
+		todasQuestoes = new ArrayList <Questao> ((Arrays.asList(
+													q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15,
+													t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15,
+													l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15,
+													f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15)));
+		//
+		
+		//janelas de perguntas
+		
+		new PanelPerguntas();
+		
+		setListaQuestoes(3);
+		embaralharListaQuestoes();
+		Questao questao = listaQuestoes.get(0);
+		System.out.println(questao.getNivel());
+		System.out.println(questao.getNumeracao());
+		}
+	}
+		
+		
+			
+		
+		
+	
+	
